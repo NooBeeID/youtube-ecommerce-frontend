@@ -1,14 +1,12 @@
 import { Search, ShoppingCart } from 'react-feather';
+import { Link } from 'react-router-dom';
 
 export default function Navbar(){
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light bg-white">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light bg-transparent mb-3 py-3">
             <div className="container">
-                <a className="navbar-brand fw-bold" href="#">NBS</a>
-                <button className="navbar-toggler d-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="d-sm-none">
+                <Link className="navbar-brand fw-bold" to="/home">NBS</Link>
+                <div className="d-lg-none">
                     <ShoppingCart />
                 </div>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
