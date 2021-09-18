@@ -1,17 +1,9 @@
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { getCategories, getProducts } from "../../actions/products";
 
 
-const categories = [
-    "Komputer", "Elektronik", "Smartphone", "TV", "Laptop"
-];
 
-const products = [
-    {id:1, name:"Sumsang A50s",         url:"https://www.electrorates.com/blogimg/Samsung-Galaxy-A50s.png", price:3300000},
-    {id:2, name:"Monitor LG MP2488",    url:"https://www.lg.com/in/images/monitors/md05772287/gallery/medium01.jpg", price:2500000},
-    {id:3, name:"Monitor LG MP2488",    url:"https://www.lg.com/in/images/monitors/md05772287/gallery/medium01.jpg", price:2500000},
-    {id:4, name:"Monitor LG MP2488",    url:"https://www.lg.com/in/images/monitors/md05772287/gallery/medium01.jpg", price:2500000},
-    {id:5, name:"Monitor LG MP2488",    url:"https://www.lg.com/in/images/monitors/md05772287/gallery/medium01.jpg", price:2500000},
-]
 
 export default function Home(){
     const router = useHistory();
@@ -19,6 +11,25 @@ export default function Home(){
     const move=(link)=>{
         router.push(link);
     }
+
+    const [products, setProducts] = useState([])
+    const [categories, setCategories] = useState([])
+
+    useEffect(()=>{
+        getAllProducts();
+        getAllCategories();
+    },[])
+
+    async function getAllProducts(){
+        const p = await getProducts();
+        setProducts(p)
+    }
+
+    async function getAllCategories(){
+        const c = await getCategories();
+        setCategories(c)
+    }
+
     return (
         <>
             <h2 className="text-center d-lg-none">NooBeeShop</h2>
@@ -48,7 +59,7 @@ export default function Home(){
                     <h6>Beragam Produk Menarik</h6>
                     <div className="row">
                         {products.map((product, i)=>(
-                            <div onClick={()=>move("/home/detail/"+product.id)} className="col-6 col-md-4 col-lg-3 mb-3">
+                            <div onClick={()=>move("/home/detail/"+product.id)} className="col-6 col-md-4 col-lg-3 mb-3 pointer" key={i} style={{cursor:"pointer"}}>
                                 <div className="card p-2 py-3" style={{borderRadius:"10px"}}>
                                     <div className="c-header">
                                         <div className="img" style={{
